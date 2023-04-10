@@ -17,7 +17,7 @@ public class Main {
     ChromeOptions options = new ChromeOptions();
     String Title;
     String ActualTitle = "Your Title";
-    String   Website = "file:///C:/My%20Web%20Sites/https___smmsenex.com_/smmsenex.com/index.html"; //Enter Website Name
+    String   Website = "http://cardtonic.com"; //Enter Website Name
 
     public WebDriver driver;
 
@@ -55,9 +55,10 @@ public class Main {
     @Test
     void Responsive() // TEST WEBSITE RESPONSIVENESS
     {
-
+        driver.manage().window().maximize();
         JavascriptExecutor js = (JavascriptExecutor)driver;
-       js.executeScript("window.scrollBy(0, 100000)");
+       js.executeScript("window.scrollBy(0, 10000)");
+
     }
 
 
