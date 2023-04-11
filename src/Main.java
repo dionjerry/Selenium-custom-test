@@ -1,7 +1,4 @@
-import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.testng.Assert;
@@ -14,26 +11,28 @@ import java.util.concurrent.TimeUnit;
 
 public class Main {
 
+
+    String ActualTitle = "Your Title";
+    String   Website = "file:///C:/My%20Web%20Sites/https___smmsenex.com_/smmsenex.com/index.html"; //Enter Website Name
+    String WebDrive = "C:\\\\Users\\\\DON JERRY\\\\Documents\\\\softwares\\\\cchromedriver.exe"; //Web driver location chromium is used
+    int ScrollPixel = 1000 ; //number of pixel to scroll through your website
     ChromeOptions options = new ChromeOptions();
     String Title;
-    String ActualTitle = "Your Title";
-    String   Website = "http://cardtonic.com"; //Enter Website Name
-
     public WebDriver driver;
 
     @BeforeTest
     void first() {
 
         options.addArguments("--remote-allow-origins=*");
-        System.setProperty("webdriver.chrome.driver", "C:\\Users\\DON JERRY\\Documents\\softwares\\cchromedriver.exe");
+        System.setProperty("webdriver.chrome.driver", WebDrive);
         driver = new ChromeDriver(options);
 
 
 
 
     }
-    @Test
-            public void  EnterWebsiteName() throws InterruptedException {
+    @Test(priority = 0)
+    void  WebsiteTitle(   ) throws InterruptedException {
 
         driver.get(Website); //Enter your Website Name
 
@@ -52,14 +51,26 @@ public class Main {
 
     }
 
-    @Test
+    @Test(priority = 1)
     void Responsive() // TEST WEBSITE RESPONSIVENESS
     {
-        driver.manage().window().maximize();
+
         JavascriptExecutor js = (JavascriptExecutor)driver;
-       js.executeScript("window.scrollBy(0, 10000)");
+        System.out.println("<<<<<Website is Scrolling down<<<<<");
+        for( int i = 0; i < ScrollPixel ; i ++) {
+            //System.out.println(i); //code test
+            js.executeScript("window.scrollBy(0, "+i+")"); }
+
+
+        System.out.println("<<<<<Website is Scrolling up<<<<<");
+        for(int i =0 ; i > -(ScrollPixel) ; i --) {
+           // System.out.println(i); //code test
+            js.executeScript("window.scrollBy(0, "+i+")"); }
+
 
     }
+
+
 
 
 
