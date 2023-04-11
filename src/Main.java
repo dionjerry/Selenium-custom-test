@@ -11,7 +11,7 @@ public class Main {
 
 
     String ActualTitle = "Your Title";
-    String   Website = "file:///C:/My%20Web%20Sites/https___smmsenex.com_/smmsenex.com/index.html"; //Enter Website Name
+    String   Website = "http://cardtonic.com"; //Enter Website Name
     String WebDrive = "C:\\\\Users\\\\DON JERRY\\\\Documents\\\\softwares\\\\cchromedriver.exe"; //Web driver location chromium is used
     int ScrollPixel = 1000 ; //number of pixel to scroll through your website
     ChromeOptions options = new ChromeOptions();
