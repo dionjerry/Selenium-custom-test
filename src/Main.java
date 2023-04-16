@@ -12,8 +12,8 @@ public class Main {
     //************************************************************************************
     //Variable TExt
     String ActualTitle = "Your Title";
-    String   Website = "http://YourWebsiteAddress"; //Enter Website Name
-    String WebDrive = "Your Webdriver Location"; //Web driver location chromium is used
+    String   Website = "Your Website NAme"; //Enter Website Name
+    String WebDrive = "your webdriver address"; //Web driver location chromium is used
     int ScrollPixel = 1000 ; //number of pixel to scroll through your website
     //************************************************************************************
     ChromeOptions options = new ChromeOptions();
@@ -93,11 +93,18 @@ public class Main {
                 driver.navigate().back();
                 Thread.sleep(3000);
             }
-            catch (NoSuchElementException e)
+            catch (NoSuchElementException   e )
             {
                     //this is empty for catching unClickable links
-            } catch (InterruptedException e) {
-                throw new RuntimeException(e); //this is for the thread waiting..
+            }
+            catch ( ElementClickInterceptedException e)
+            {
+                System.out.println("navigating back to home page");
+                driver.navigate().to(Website);
+            }
+
+            catch (InterruptedException e) {
+                throw new RuntimeException(e); //this is for the thread waiting.
             }
 
         }
