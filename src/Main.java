@@ -12,8 +12,8 @@ public class Main {
     //************************************************************************************
     //Variable TExt
     String ActualTitle = "Your Title";
-    String   Website = "Your Website NAme"; //Enter Website Name
-    String WebDrive = "your webdriver address"; //Web driver location chromium is used
+    String   Website = "https://google.com/"; //Enter Website Name
+    String WebDrive = "Your Webdriver location"; //Web driver location chromium is used
     int ScrollPixel = 1000 ; //number of pixel to scroll through your website
     //************************************************************************************
     ChromeOptions options = new ChromeOptions();
@@ -75,6 +75,7 @@ public class Main {
     @Test(priority = 2 )
     void VisitPages()
     {
+        String parentHandle = driver.getWindowHandle(); // get the current window handle
         WebElement bodyText = driver.findElement(By.cssSelector("body")); //locates all text in website
        String BodilyText = bodyText.getText(); //grabs all the text in the website
         System.out.println(BodilyText);
@@ -90,7 +91,13 @@ public class Main {
 
                 driver.findElement(By.linkText(Clicker)).click(); //locate each text and click
                 Thread.sleep(3000);
-                driver.navigate().back();
+                for (String winHandle : driver.getWindowHandles()) {
+                    driver.switchTo().window(winHandle); // switch focus of WebDriver to the next found window handle (that's your newly opened window)
+                }
+
+                //code to do something on new window if any
+                driver.switchTo().window(parentHandle);  // switch back to the original window new window if any
+                driver.navigate().to(Website);
                 Thread.sleep(3000);
             }
             catch (NoSuchElementException   e )
@@ -106,6 +113,10 @@ public class Main {
             catch (InterruptedException e) {
                 throw new RuntimeException(e); //this is for the thread waiting.
             }
+            catch (NoSuchWindowException ex )
+            {
+                driver.navigate().to(Website);
+            } //4
 
         }
 
